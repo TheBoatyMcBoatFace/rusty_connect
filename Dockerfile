@@ -1,14 +1,25 @@
-# Use the latest Rust image as the base
+# Use the latest Rust image
 FROM rust:latest
 
 # Set the working directory
 WORKDIR /app
 
-# Copy the application code into the container
+# Copy the contents of the local directory to the working directory
 COPY . .
 
-# Install the dependencies
+# Set environment variables
+ENV API_KEY=ChangeMe
+ENV GOOGLE_CLOUD_KEY=YourGoogleCloudKey
+ENV GOOGLE_PROJECT_ID=YourGoogleCloudProjectID
+ENV A11Y_URL=A11yWatchURL
+ENV A11Y_JWT=A11yWatchAPIKey
+ENV GOOGLE_APPLICATION_CREDENTIALS=YourGoogleCloudJsonCreds
+
+# Install dependencies
 RUN cargo install --path .
+
+# Expose port 8080
+EXPOSE 8080
 
 # Build the application
 RUN cargo build --release
