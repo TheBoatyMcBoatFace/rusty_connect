@@ -7,8 +7,9 @@ use crate::auth::ApiKey;
 use crate::bigquery::read_up_targets;
 use crate::bigquery::store as bq_store;
 use rocket::post;
-use rocket::{http::Status, response::status};
-use serde_json::Value;
+use rocket::{http::Status, response::status, Data};
+use serde_json::Value as JsonValue;
+use std::io::{BufReader, Read};
 
 /*
         This module's purpose is to determine if a website is available or not.
@@ -48,12 +49,15 @@ use serde_json::Value;
 
 */
 
-#[post("/up", data = "<data>")]
+#[post("/up", data = "<raw_data>")]
 pub(crate) fn catch_up(
-    data: String,
+    raw_data: Data,
     _key: ApiKey,
 ) -> Result<String, rocket::response::status::Custom<std::string::String>> {
-    let data: serde_json::Map<String, Value> = serde_json::from_str(&data).map_err(|e| {
+    let data: serde_json::Map<String, JsonValue> = serde_json::from_reader(BufReader::new(
+        raw_data.open().take(1024 * 1024),
+    ))
+    .map_err(|e| {
         status::Custom(
             Status::BadRequest,
             format!("failed to parse body data: {}", e),

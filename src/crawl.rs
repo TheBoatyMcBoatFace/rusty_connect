@@ -1,8 +1,10 @@
 use reqwest::Client;
-use rocket::{http::Status, post, response::status};
+use rocket::{http::Status, post, response::status, Data};
+use serde::de::IntoDeserializer;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use serde_json::Value as JsonValue;
+use std::io::{BufReader, Read};
 use std::time::Duration;
 
 use crate::auth::ApiKey;
@@ -90,30 +92,33 @@ The issues are then added to BigQuery. One row per issue. See bq_issues.json for
 
 */
 
-#[post("/crawl", data = "<data_str>")]
+#[post("/crawl", data = "<raw_data>")]
 pub fn catch_crawl(
-    data_str: String,
+    raw_data: Data,
     _key: ApiKey,
 ) -> Result<
     rocket::response::content::Json<String>,
     rocket::response::status::Custom<std::string::String>,
 > {
-    let data: serde_json::Map<String, JsonValue> =
-        serde_json::from_str(&data_str).map_err(|e| {
-            status::Custom(
-                Status::BadRequest,
-                format!("failed to parse body data: {}", e),
-            )
-        })?;
+    let data: serde_json::Map<String, JsonValue> = serde_json::from_reader(BufReader::new(
+        raw_data.open().take(1024 * 1024),
+    ))
+    .map_err(|e| {
+        status::Custom(
+            Status::BadRequest,
+            format!("failed to parse body data: {}", e),
+        )
+    })?;
     let rt = tokio::runtime::Runtime::new().unwrap();
     match data.get("action").map(|v| v.as_str()).flatten() {
         Some("scan") => {
-            let data: CrawlData = serde_json::from_str(&data_str).map_err(|e| {
-                status::Custom(
-                    Status::BadRequest,
-                    format!("failed to parse body data: {}", e),
-                )
-            })?;
+            let data = CrawlData::deserialize(JsonValue::Object(data).into_deserializer())
+                .map_err(|e| {
+                    status::Custom(
+                        Status::BadRequest,
+                        format!("failed to parse body data: {}", e),
+                    )
+                })?;
             Ok(rocket::response::content::Json(
                 run_crawl(data)?.to_string(),
             ))
