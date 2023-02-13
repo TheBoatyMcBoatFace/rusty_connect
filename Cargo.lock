@@ -1213,7 +1213,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "rusty_a11y"
+name = "rusty_connect"
 version = "0.1.0"
 dependencies = [
  "gcp-bigquery-client",

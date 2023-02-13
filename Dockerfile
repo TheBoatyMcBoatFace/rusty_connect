@@ -18,8 +18,8 @@ ENV GOOGLE_APPLICATION_CREDENTIALS=YourGoogleCloudJsonCreds
 # Install dependencies
 RUN cargo install --path .
 
-# Expose port 8080
-EXPOSE 8080
+# Expose port 8000
+EXPOSE 8000
 
 # Build the application
 RUN cargo build --release
