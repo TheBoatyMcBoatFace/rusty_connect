@@ -1,5 +1,6 @@
 #![feature(proc_macro_hygiene, decl_macro, result_flattening)]
 extern crate rocket;
+use rocket::config::{Config, Environment};
 use rocket::routes;
 
 mod auth;
@@ -34,7 +35,13 @@ pub fn get_env(name: &'static str) -> Result<String, String> {
 }
 
 fn main() {
-    rocket::ignite()
+    let config = Config::build(Environment::Development)
+        .address("0.0.0.0")
+        .port(8000)
+        .finalize()
+        .unwrap();
+
+    rocket::custom(config)
         .mount("/", routes![up::catch_up])
         .mount("/", routes![scan::catch_scan])
         .mount("/", routes![crawl::catch_crawl])
