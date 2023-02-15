@@ -25,4 +25,5 @@ EXPOSE 8000
 RUN cargo build --release
 
 # Set the command to run when the container starts
-CMD ["./target/release/main"]
+# CMD ["./target/release/main"]
+CMD cargo run
