@@ -32,7 +32,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4.3.0
         with:
-          images: ${{ env.REGISTRY }}/main
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3.3.0
@@ -41,11 +41,19 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            API_KEY=Test123
+            GOOGLE_CLOUD_KEY=${{ secrets.CLOUDKEY }}
+            GOOGLE_PROJECT_ID=${{ secrets.PROJECTID }}
+            A11Y_URL=${{ secrets.A11YURL }}
+            A11Y_JWT=
+            GOOGLE_APPLICATION_CREDENTIALS=${{ secrets.GOOGLEAPPCREDS }}
+
 #  deploy:
- #   name: Deploy to Namespace
-  #  needs: build-and-publish
-   # runs-on: self-hosted
-    #steps:
+#   name: Deploy to Namespace
+#  needs: build-and-publish
+# runs-on: self-hosted
+#steps:
 #      - uses: actions/checkout@v3
 #      - uses: azure/setup-kubectl@v3
 #      - name: Deploy
