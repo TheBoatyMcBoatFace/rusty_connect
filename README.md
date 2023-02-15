@@ -4,6 +4,14 @@ A collection of dockerized server-side applications using the Rocketweb Rust Fra
 
 The application is built using Rust's package manager cargo and it can be built and run using Docker. The provided Dockerfile creates a container that includes all of the dependencies, source code, and the built binary of the application. When the container is run, it starts the application and it would be able to connect to the BigQuery using the environment variable GOOGLE_CLOUD_KEY.
 
+## Getting Started
+
+## Docs
+
+The documentation can be found in the [docs](docs) folder.
+
+## Contributing
+
 ## GOALS OF PROGRAM
 
 We are deploying (another un-related project) the A11yWatch API to perform accessibility scans on websites.
