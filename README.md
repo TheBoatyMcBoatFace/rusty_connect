@@ -33,7 +33,7 @@ The API/docs I've started are below, but here is an explination of what we are l
 |               Variable |                         Description                         |                                         Example                                         |
 | ---------------------: | :---------------------------------------------------------: | :-------------------------------------------------------------------------------------: | --- |
 |               A11Y_URL |                    URL of A11yWatch API                     |                            `https://api.a11ywatch.com/api/`                             |
-|       GOOGLE_CLOUD_KEY |                       JSON Google Key                       | [Google Docs](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) |
+| GOOGLE_APPLICATION_CREDENTIALS |                       JSON Google Key                       | [Google Docs](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) |
 | GOOGLE_SERVICE_ACCOUNT |                        Account Name                         |                    `someThing@someNamespace.iam.gserviceaccount.com`                    |
 |      GOOGLE_PROJECT_ID |               project id for google big query               |
 |         port_container |              Port exposed by this application               |                                          8080                                           |

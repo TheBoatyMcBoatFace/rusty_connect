@@ -16,7 +16,7 @@ impl Iden for MyIden {
 }
 
 pub async fn read_up_targets(dataset_name: String) -> Result<Vec<String>, String> {
-    let client = Client::from_authorized_user_secret(&get_env("GOOGLE_CLOUD_KEY")?)
+    let client = Client::from_authorized_user_secret(&get_env("GOOGLE_APPLICATION_CREDENTIALS")?)
         .await
         .map_err(|e| format!("{}", e))?;
     let mut result_set = client
@@ -43,7 +43,7 @@ pub async fn read_up_targets(dataset_name: String) -> Result<Vec<String>, String
 }
 
 pub async fn read_crawl_targets(dataset_name: String) -> Result<Vec<CrawlData>, String> {
-    let client = Client::from_authorized_user_secret(&get_env("GOOGLE_CLOUD_KEY")?)
+    let client = Client::from_authorized_user_secret(&get_env("GOOGLE_APPLICATION_CREDENTIALS")?)
         .await
         .map_err(|e| format!("{}", e))?;
     let mut result_set = client
@@ -99,7 +99,7 @@ pub async fn store(
     table_name: String,
     object: &JsonValue,
 ) -> Result<(), String> {
-    let client = Client::from_authorized_user_secret(&get_env("GOOGLE_CLOUD_KEY")?)
+    let client = Client::from_authorized_user_secret(&get_env("GOOGLE_APPLICATION_CREDENTIALS")?)
         .await
         .map_err(|e| format!("{}", e))?;
 
