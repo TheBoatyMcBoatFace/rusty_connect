@@ -9,6 +9,7 @@ mod crawl;
 mod map_json;
 mod scan;
 mod up;
+mod status;
 
 /*
             Goal
@@ -45,5 +46,7 @@ fn main() {
         .mount("/", routes![up::catch_up])
         .mount("/", routes![scan::catch_scan])
         .mount("/", routes![crawl::catch_crawl])
+        .mount("/", routes![status::catch_ready])
+        .mount("/", routes![status::catch_health])
         .launch();
 }
