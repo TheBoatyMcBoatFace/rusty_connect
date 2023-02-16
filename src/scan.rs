@@ -10,6 +10,7 @@ use crate::auth::ApiKey;
 use crate::bigquery::store as bq_store;
 use crate::get_env;
 use crate::map_json::JsonMapper;
+use crate::util::check_for_error;
 
 // Struct for holding the json body data
 #[derive(Serialize, Deserialize, Debug)]
@@ -79,12 +80,7 @@ pub fn catch_scan(
         )
     })?;
 
-    if response.as_object().map(|obj| obj.get("success")).flatten() != Some(&JsonValue::Bool(true)) {
-        return Err(status::Custom(
-            Status::FailedDependency,
-            format!("{}", response)
-        ));
-    }
+    check_for_error(&response)?;
 
     // apply json mappings and upload to google big query
     let mapper_bq_issues =

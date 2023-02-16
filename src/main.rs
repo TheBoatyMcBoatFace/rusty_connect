@@ -8,8 +8,9 @@ pub mod bigquery;
 mod crawl;
 mod map_json;
 mod scan;
-mod up;
 mod status;
+mod up;
+mod util;
 
 /*
             Goal
