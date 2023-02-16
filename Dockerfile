@@ -9,7 +9,6 @@ COPY . .
 
 # Set environment variables
 ENV API_KEY=ChangeMe
-ENV GOOGLE_CLOUD_KEY=YourGoogleCloudKey
 ENV GOOGLE_PROJECT_ID=YourGoogleCloudProjectID
 ENV A11Y_URL=A11yWatchURL
 ENV A11Y_JWT=A11yWatchAPIKey
