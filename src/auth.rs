@@ -5,19 +5,49 @@ use rocket::Outcome;
 
 /*
 Code Summary:
-This module handles the authorization of requests by verifying that the API key in the "x-auth" field of the header is valid. If the key is missing, invalid, or the environment variable containing the key is not set, the request is rejected with an appropriate status code.
+This module handles the authorization of requests by verifying that the API key in the "x-auth" field of the header is valid. If the key is missing, invalid, or the environment variable containing the key is not set, the request is rejected with an appropriate status code. It defines a custom request guard, ApiKey, which checks if the x-auth header of an incoming request matches a given API key in the environment. The from_request method of ApiKey checks the header and environment variables, then returns an Outcome that is either a ApiKey or an ApiKeyError.
 
-Function:
 
-FromRequest: trait that defines how a request is authorized by checking if the x-auth header contains the correct API key. If the key is valid, returns an instance of the ApiKey struct.
+Variables:
+    keys:
+        A Vec of headers in the x-auth field of an incoming request.
 
-Struct:
+    key:
+        An Option that retrieves the value of the API_KEY environment variable.
 
-ApiKey: contains the valid API key as a String.
+    ApiKeyError:
+        An enum type that specifies the possible errors that can occur during the request guard check.
 
-Enum:
+    ApiKey:
+         A struct that represents a valid API key.
 
-ApiKeyError: contains error types for the FromRequest function.
+Functions:
+    from_request:
+        This method is called by Rocket when it receives an incoming request. It checks the x-auth header and compares it to the API key in the environment. It then returns an Outcome that is either a ApiKey or an ApiKeyError.
+
+
+
+Docker Vars:
+
+
+
+Output:
+
+
+Errors:
+    BadCount:
+        Returned when there are multiple API keys in the header.
+
+    Missing:
+        Returned when there is no API key in the header.
+
+    Invalid:
+        Returned when the API key in the header does not match the key in the environment.
+
+    NotSet:
+        Returned when the API_KEY environment variable is not set.
+
+
 */
 
 #[derive(Debug)]
