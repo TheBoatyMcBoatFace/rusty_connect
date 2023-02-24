@@ -1,4 +1,10 @@
 {
   "last_scan_date": "data.lastScanDate",
-  "url": "data.url"
+  "url": "data.url",
+  "domain": "",
+  "load_time": "data.pageLoadTime.duration",
+  "load_speed": "data.pageLoadTime.speedFormatted",
+  "code": "data.issues.code",
+  "type": "data.issues.type",
+  "message": "data.issues.message"
 }
