@@ -15,17 +15,15 @@ This module contains functions to retrieve data from and store data in Google Bi
 read_up_targets: retrieves a list of URLs to be crawled from the up_targets table in the specified dataset
 read_crawl_targets: retrieves a list of crawl targets from the crawl_targets table in the specified dataset
 store: stores a JSON object in the specified table in the specified dataset in Google BigQuery
-*/
 
-/*
+
 API Key:
 The GOOGLE_APPLICATION_CREDENTIALS environment variable should be set to the path of a service account key file for a Google Cloud project.
 
 The GOOGLE_PROJECT_ID environment variable should be set to the ID of the Google Cloud project.
-*/
+
 
 // Implementation details:
-/*
 
 The read_up_targets function executes a query to retrieve a list of URLs to be crawled from the up_targets table in the specified dataset. The dataset_name parameter is the name of the dataset containing the table. The function returns a vector of strings representing the URLs.
 
