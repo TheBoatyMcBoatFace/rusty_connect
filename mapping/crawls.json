@@ -1,4 +1,6 @@
 {
-  "last_scan_date": "data.lastScanDate",
-  "url": "data.url"
+  "domain": "data.domain",
+  "load_speed": "data.pageLoadTime.durationFormatted",
+  "issues_total": "data.issuesInfo.totalIssues",
+  "access_score": "data.issuesInfo.accessScore"
 }
