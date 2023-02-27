@@ -4,7 +4,7 @@
   "url": "data.url",
   "domain": "data.domain",
   "last_scan_at": "data.lastScanDate",
-  "code": "data.issues.code",
+  "issue_code": "data.issues.code",
   "type": "data.issues.type",
   "type_code": "data.issues.typeCode",
   "context": "data.issues.context",

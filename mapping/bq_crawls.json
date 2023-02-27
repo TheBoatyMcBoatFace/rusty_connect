@@ -5,6 +5,5 @@
   "load_speed": "data.pageLoadTime.durationFormated",
   "load_time": "data.pageLoadTIme.duration",
   "success": "success",
-  "code": "code",
   "issues_total": "data.issuesInfo.totalIssues"
 }
