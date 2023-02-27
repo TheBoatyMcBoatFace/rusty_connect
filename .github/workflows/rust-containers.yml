@@ -11,6 +11,8 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }} # Set as current repo. Can change to alternate if these shifted to another location.
+  OWNER: theboatymcboatface
+  REPONAME: rusty_connect
 
 jobs:
   build-and-publish:
@@ -39,9 +41,10 @@ jobs:
         uses: docker/metadata-action@v4.3.0
         with:
           images: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-            theboatymcboatface/rusty_connect
-            ghcr.io/${{ github.repository }}
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.REPONAME }}
+            docker.io/${{ env.OWNER }}/${{ env.REPONAME }}
+          #  theboatymcboatface/rusty_connect
+          tags: ${{ github.sha }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3.3.0
@@ -57,15 +60,3 @@ jobs:
             A11Y_URL=${{ secrets.A11YURL }}
             A11Y_JWT=
             GOOGLE_APPLICATION_CREDENTIALS=${{ secrets.GOOGLEAPPCREDS }}
-
-  # https://docs.github.com/en/actions/publishing-packages/publishing-docker-images#publishing-images-to-github-packages
-
-#  deploy:
-#   name: Deploy to Namespace
-#  needs: build-and-publish
-# runs-on: self-hosted
-#steps:
-#      - uses: actions/checkout@v3
-#      - uses: azure/setup-kubectl@v3
-#      - name: Deploy
-#        run: kubectl apply --namespace=public-sector-a11y_connect -f k8s
