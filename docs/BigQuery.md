@@ -1,19 +1,4 @@
 # Google BigQuery
 
-GOOGLE_APPLICATION_CREDENTIALS
-GOOGLE_PROJECT_ID
-
-## Authentication
-
-GOOGLE_APPLICATION_CREDENTIALS
-GOOGLE_PROJECT_ID
-
 ## Tables
 
-### Domains
-
-`GOOGLE_DATASET.domains`
-
-### Crawls
-
-### Issues
