@@ -44,7 +44,7 @@ jobs:
             ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.REPONAME }}
             docker.io/${{ env.OWNER }}/${{ env.REPONAME }}
           #  theboatymcboatface/rusty_connect
-          tags: ${{ github.sha }}
+          tags: ${{ github.sha }}:7
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3.3.0
