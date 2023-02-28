@@ -1,6 +1,4 @@
 {
   "domain": "data.domain",
-  "load_speed": "data.pageLoadTime.durationFormatted",
-  "issues_total": "data.issuesInfo.totalIssues",
-  "access_score": "data.issuesInfo.accessScore"
+  "issues_total": "data.issuesInfo.totalIssues"
 }
