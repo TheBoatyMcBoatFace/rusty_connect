@@ -46,7 +46,7 @@ impl Iden for MyIden {
 // Retrieve a list of URLs to crawl
 pub async fn read_up_targets(dataset_name: String) -> Result<Vec<String>, String> {
     // Create a client to communicate with Google BigQuery
-    let client = Client::from_service_account_key_file(&get_env("GOOGLE_APPLICATION_CREDENTIALS")?)
+    let client = Client::from_service_account_key(&get_env("GOOGLE_APPLICATION_CREDENTIALS")?)
         .await
         .map_err(|e| format!("{}", e))?;
 
@@ -79,7 +79,7 @@ pub async fn read_up_targets(dataset_name: String) -> Result<Vec<String>, String
 // Retrieve a list of crawl targets
 pub async fn read_crawl_targets(dataset_name: String) -> Result<Vec<CrawlData>, String> {
     // Create a client to communicate with Google BigQuery
-    let client = Client::from_service_account_key_file(&get_env("GOOGLE_APPLICATION_CREDENTIALS")?)
+    let client = Client::from_service_account_key(&get_env("GOOGLE_APPLICATION_CREDENTIALS")?)
         .await
         .map_err(|e| format!("{}", e))?;
 
@@ -141,7 +141,7 @@ pub async fn store(
     object: &JsonValue,
 ) -> Result<(), String> {
     // Create a client to communicate with Google BigQuery
-    let client = Client::from_service_account_key_file(&get_env("GOOGLE_APPLICATION_CREDENTIALS")?)
+    let client = Client::from_service_account_key(&get_env("GOOGLE_APPLICATION_CREDENTIALS")?)
         .await
         .map_err(|e| format!("{}", e))?;
 
